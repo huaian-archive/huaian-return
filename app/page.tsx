@@ -3,14 +3,14 @@
 import { useState } from "react";
 
 const people = [
-  { no: "01", name: "喬以棠", role: "危機公關顧問", age: "37", mark: "173 cm · 烏黑低馬尾", core: "擅長整理混亂資訊並預判反應。願意失控，也不相信臨場坦白必然有用。", key: "供詞", image: "/characters/qiao-yitang.png", quote: "先確認一件事" },
-  { no: "02", name: "唐霽", role: "系統測試工程師", age: "36", mark: "181 cm · 黑框眼鏡", core: "重視因果與可重複驗證，對『先發生行為、紀錄才改變』尤其敏感。", key: "程序", image: "/characters/tang-ji.png", quote: "再做一次就知道" },
-  { no: "03", name: "江敘衡", role: "戶政事務所課員", age: "36", mark: "165 cm · 薄硬文件袋", core: "相信紀錄持續生效必有依據；制度修正傷人時，也需要證據承認程序本身有錯。", key: "戶籍", image: "/characters/jiang-xuheng.png", quote: "這份紀錄尚未成立" },
-  { no: "04", name: "顏舒綺", role: "諮商心理師", age: "35", mark: "168 cm · 左耳銀耳扣", core: "擅長觀察反應與記憶落差，知道安撫既能協助，也能誘導。", key: "辨識", image: "/characters/yan-shuqi.jpg", quote: "先核對你記得的" },
-  { no: "05", name: "周蘊慈", role: "出版社校對編輯", age: "34", mark: "158 cm · 習慣戴白手套", core: "對文字敏感，能辨出用詞與描述被替換；危險時會把自己排除在決策之外。", key: "校對", image: "/characters/zhou-yunci.png", quote: "那句話以前沒有" },
-  { no: "06", name: "裴其聲", role: "聲音後期製作師", age: "37", mark: "177 cm · 右耳銀色助聽器", core: "能保存聲紋、拆解呼吸與背景音；不相信內容，只保留原始檔與版本。", key: "聲紋", image: "/characters/pei-qisheng.jpg", quote: "這段剪得真差" },
-  { no: "07", name: "程復", role: "消防安全顧問", age: "37", mark: "187 cm · 左腕磨損機械錶", core: "先判斷出口、傷勢與時間，再決定風險。願意留下斷後，但不抽象地要求犧牲。", key: "救援", image: "/characters/cheng-fu.png", quote: "先出去" },
-  { no: "08", name: "賀文野", role: "戶外體能教練", age: "35", mark: "184 cm · 左側犬齒缺一角", core: "行動快於抽象規則，先看眼前的人是否受傷；正受傷也會掩飾並停止眼前行為。", key: "行動", image: "/characters/he-wenye.png", quote: "先把人放開" },
+  { no: "01", name: "喬以棠", role: "危機公關顧問", age: "37", mark: "173 cm · 烏黑低馬尾", core: "擅長整理混亂資訊並預判反應。願意失控，也不相信臨場坦白必然有用。", key: "供詞", image: "/characters/qiao-yitang-optimized.jpg", quote: "先確認一件事" },
+  { no: "02", name: "唐霽", role: "系統測試工程師", age: "36", mark: "181 cm · 黑框眼鏡", core: "重視因果與可重複驗證，對『先發生行為、紀錄才改變』尤其敏感。", key: "程序", image: "/characters/tang-ji-optimized.jpg", quote: "再做一次就知道" },
+  { no: "03", name: "江敘衡", role: "戶政事務所課員", age: "36", mark: "165 cm · 薄硬文件袋", core: "相信紀錄持續生效必有依據；制度修正傷人時，也需要證據承認程序本身有錯。", key: "戶籍", image: "/characters/jiang-xuheng-optimized.jpg", quote: "這份紀錄尚未成立" },
+  { no: "04", name: "顏舒綺", role: "諮商心理師", age: "35", mark: "168 cm · 左耳銀耳扣", core: "擅長觀察反應與記憶落差，知道安撫既能協助，也能誘導。", key: "辨識", image: "/characters/yan-shuqi-optimized.jpg", quote: "先核對你記得的" },
+  { no: "05", name: "周蘊慈", role: "出版社校對編輯", age: "34", mark: "158 cm · 習慣戴白手套", core: "對文字敏感，能辨出用詞與描述被替換；危險時會把自己排除在決策之外。", key: "校對", image: "/characters/zhou-yunci-optimized.jpg", quote: "那句話以前沒有" },
+  { no: "06", name: "裴其聲", role: "聲音後期製作師", age: "37", mark: "177 cm · 右耳銀色助聽器", core: "能保存聲紋、拆解呼吸與背景音；不相信內容，只保留原始檔與版本。", key: "聲紋", image: "/characters/pei-qisheng-optimized.jpg", quote: "這段剪得真差" },
+  { no: "07", name: "程復", role: "消防安全顧問", age: "37", mark: "187 cm · 左腕磨損機械錶", core: "先判斷出口、傷勢與時間，再決定風險。願意留下斷後，但不抽象地要求犧牲。", key: "救援", image: "/characters/cheng-fu-optimized.jpg", quote: "先出去" },
+  { no: "08", name: "賀文野", role: "戶外體能教練", age: "35", mark: "184 cm · 左側犬齒缺一角", core: "行動快於抽象規則，先看眼前的人是否受傷；正受傷也會掩飾並停止眼前行為。", key: "行動", image: "/characters/he-wenye-optimized.jpg", quote: "先把人放開" },
 ];
 
 const timeline = [
