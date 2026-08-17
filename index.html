@@ -19,7 +19,7 @@
   <section class="persons" id="persons">
     <header class="section-head"><div><p class="eyebrow">PERSONNEL / 01—08</p><h2>八人的名字，都是真的。</h2></div><p>每次只能由一人清點。<br>少一人，便無法閉合。</p></header>
     <div class="person-layout"><div class="person-list" id="person-list" role="tablist" aria-label="八人名冊"></div>
-      <article class="dossier" aria-live="polite"><div class="dossier-top"><span id="record-no"></span><span>STATUS / 在籍</span></div><div class="dossier-content"><div class="portrait-wrap"><img class="portrait" id="portrait" alt=""><q id="quote"></q></div><div class="record-copy"><p class="filelabel">PERSONNEL RECORD</p><h3 id="record-name"></h3><p class="role" id="record-role"></p><div class="redline"></div><dl><div><dt>識別特徵</dt><dd id="record-mark"></dd></div><div><dt>核心判斷</dt><dd id="record-core"></dd></div><div><dt>最後察覺</dt><dd id="record-last"></dd></div></dl></div></div><div class="stamp">已核<br>在籍</div></article>
+      <article class="dossier" aria-live="polite"><div class="dossier-top"><span id="record-no"></span><span>STATUS / 在籍</span></div><div class="dossier-content"><div class="portrait-wrap"><img class="portrait" id="portrait" alt=""><q id="quote"></q></div><div class="record-copy"><p class="filelabel">PERSONNEL RECORD</p><h3 id="record-name"></h3><p class="role" id="record-role"></p><div class="redline"></div><dl><div><dt>識別特徵</dt><dd id="record-mark"></dd></div><div><dt>核心判斷</dt><dd id="record-core"></dd></div></dl></div></div><div class="stamp">已核<br>在籍</div></article>
     </div>
   </section>
   <section class="records" id="records"><div class="record-intro"><p class="eyebrow">INCIDENT / 2006</p><h2>一個時間點，<br>八份不完整的真相。</h2><p>第009號不是房號、真人或寄件者。它是八項行為與八份供詞拼成的空殼。</p></div><div class="timeline"><div><time>21:40</time><span></span><p>江敘衡偷取父親保管的總鑰匙，開啟側門。</p></div><div class="hot"><time>22:17</time><span></span><p>火警啟動；第八人同時看見共同目擊者。</p></div><div><time>22:19</time><span></span><p>廣播出現聲紋異常，其聲音後來被第009號取代。</p></div><div><time>2007</time><span></span><p>水下槐安竣工，舊址沉沒，戶籍與檔案開始錯位。</p></div><div><time>2026</time><span></span><p>水位下降，八名事件目擊者收到臨時安置通知。</p></div></div></section>
@@ -27,6 +27,8 @@
     <li><b>姓名</b><span>只能回答安置證所列姓名；若有人叫出正確姓名，不得回應。</span></li><li><b>人數</b><span>每次集合只可由一人清點；結果不是八人，不得重數。</span></li><li><b>紅衣</b><span>至少一人持續注視，所有人退入最近房間並關門。</span></li><li><b>火警</b><span>22:17 後若響起又自行中止，留在原處，照明恢復前不得點名。</span></li><li><b>廣播</b><span>女聲若引導前往東側出口或地下通道，不得依指示移動。</span></li><li><b>門後</b><span>若有人求救、叫名或自稱熟人，只可回答一次：「你認錯了」。</span></li><li><b>記憶</b><span>正確記憶與紀錄衝突時，也只可回答一次，不得立即核對細節。</span></li><li><b>孔洞</b><span>若同時看見相同面孔，持續注視，並以實體門隔離兩者。</span></li>
   </ol><footer><span>HUAIAN COUNTY / ARCHIVE 009</span><p>違規只新增錯位，不停止歸籍。</p></footer></section>
 </main>
+<div class="archive-toast" id="archive-toast" aria-live="polite"></div>
+<div class="jumpscare" id="jumpscare" aria-hidden="true"><div class="jumpscare-face"><span>009</span><b>你已被點名</b><small>不要回頭</small></div></div>
 <script>
 const people=[
 {no:'01',name:'喬以棠',role:'危機公關顧問',age:'37',mark:'173 cm · 烏黑低馬尾',core:'擅長整理混亂資訊並預判反應。願意失控，也不相信臨場坦白必然有用。',key:'供詞',image:'public/characters/qiao-yitang.png',quote:'先確認一件事'},
@@ -38,8 +40,13 @@ const people=[
 {no:'07',name:'程復',role:'消防安全顧問',age:'37',mark:'187 cm · 左腕磨損機械錶',core:'先判斷出口、傷勢與時間，再決定風險。願意留下斷後，但不抽象地要求犧牲。',key:'救援',image:'public/characters/cheng-fu.png',quote:'先出去'},
 {no:'08',name:'賀文野',role:'戶外體能教練',age:'35',mark:'184 cm · 左側犬齒缺一角',core:'行動快於抽象規則，先看眼前的人是否受傷；正受傷也會掩飾並停止眼前行為。',key:'行動',image:'public/characters/he-wenye.png',quote:'先把人放開'}];
 const list=document.querySelector('#person-list');
-function showPerson(index){const p=people[index];document.querySelectorAll('#person-list button').forEach((b,i)=>{b.setAttribute('aria-selected',String(i===index));});document.querySelector('#record-no').textContent=`第 ${p.no} 項`;document.querySelector('#portrait').src=p.image;document.querySelector('#portrait').alt=`${p.name}角色照片`;document.querySelector('#quote').textContent=p.quote;document.querySelector('#record-name').textContent=p.name;document.querySelector('#record-role').textContent=`${p.role} · ${p.age} 歲`;document.querySelector('#record-mark').textContent=p.mark;document.querySelector('#record-core').textContent=p.core;document.querySelector('#record-last').textContent=`第 ${p.no} 項成立時，確認八人的事在轉移給「你」。`;}
+function showPerson(index){const p=people[index];document.querySelectorAll('#person-list button').forEach((b,i)=>{b.setAttribute('aria-selected',String(i===index));});document.querySelector('#record-no').textContent=`第 ${p.no} 項`;document.querySelector('#portrait').src=p.image;document.querySelector('#portrait').alt=`${p.name}角色照片`;document.querySelector('#quote').textContent=p.quote;document.querySelector('#record-name').textContent=p.name;document.querySelector('#record-role').textContent=`${p.role} · ${p.age} 歲`;document.querySelector('#record-mark').textContent=p.mark;document.querySelector('#record-core').textContent=p.core;}
 people.forEach((p,i)=>{const button=document.createElement('button');button.type='button';button.role='tab';button.innerHTML=`<em>${p.no}</em><span>${p.name}<small>${p.role}</small></span><i>${p.key}</i>`;button.addEventListener('click',()=>showPerson(i));list.appendChild(button);});showPerson(0);
+const responses=['已記錄','不要重數','有人看見你了','第009項正在補正','這不是你的名字','門後沒有任何人','請保持注視','紀錄與你不符'];
+const toast=document.querySelector('#archive-toast');const scare=document.querySelector('#jumpscare');let touches=0;let toastTimer;let scareTimer;
+function triggerScare(){scare.classList.add('show');scare.setAttribute('aria-hidden','false');document.body.classList.add('scare-shake');clearTimeout(scareTimer);scareTimer=setTimeout(()=>{scare.classList.remove('show');scare.setAttribute('aria-hidden','true');document.body.classList.remove('scare-shake');},1050);}
+document.addEventListener('pointerdown',event=>{if(scare.classList.contains('show'))return;touches++;const ripple=document.createElement('i');ripple.className='archive-ripple';ripple.style.left=`${event.clientX}px`;ripple.style.top=`${event.clientY}px`;document.body.appendChild(ripple);setTimeout(()=>ripple.remove(),650);toast.textContent=responses[(touches-1)%responses.length];toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),850);if(touches>=7&&Math.random()<.38){touches=0;setTimeout(triggerScare,180);}});
+scare.addEventListener('pointerdown',()=>{scare.classList.remove('show');scare.setAttribute('aria-hidden','true');document.body.classList.remove('scare-shake');});
 </script>
 </body>
 </html>
