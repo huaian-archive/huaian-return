@@ -1,1 +1,14 @@
-m«ëˆ§½©buªàºg§µªişV²¢ëm³,j›jÇºà7an{¦Š)ßŠW¨¢ë_ŠW›n·š‘ºŞjG§r‡^vËkŠx"Ú'ºg!j¶œµêåŠw¬×^r‡^uç(uë"›­†¥¥Ø¬¦V²¶¬™ë,j¢Šzn¶)éº×â•ç^}«¥µú+²×bŠ.¶›­¢ëiº×â•ç^}«¥µú+²×hº
+import type { Metadata } from "next";
+import { headers } from "next/headers";
+import "./globals.css";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const incoming = await headers();
+  const host = incoming.get("x-forwarded-host") ?? incoming.get("host") ?? "localhost:3000";
+  const protocol = incoming.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const image = `${protocol}://${host}/og.png`;
+  const title = "æ§å®‰æ­¸ç±ï½œäº‹æ•…æª”æ¡ˆ 009";
+  const description = "å…«å€‹åå­—ï¼Œä¸€å€‹ä¸å­˜åœ¨çš„æˆ¶ç±ã€‚æŸ¥é–±æ§å®‰äº‹æ•…æª”æ¡ˆèˆ‡è‡¨æ™‚å®‰ç½®å®ˆå‰‡ã€‚";
+  return { title, description, openGraph: { title, description, images: [image] }, twitter: { card: "summary_large_image", title, description, images: [image] } };
+}
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="zh-Hant"><body>{children}</body></html>; }

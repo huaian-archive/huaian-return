@@ -1,1 +1,5 @@
-m«ëˆ§½©buªàºg§¶w±µéïvÛ±¨m«ë€İ…¹îš(§~)^¢‹­~)^mºŞjFëy©ÊyÛ-®)àŠ{héœ…ªÚr×«–)Ş°7]yÊy×œ¡×¬Šzn¶^–—b²™ZÊØb²g¬±¨Š)éºØ§¦ë_ŠWyö®–×è®Ë]Šz(ºÚn¶‹­¦ë_ŠWyö®–×è®Ë]¢ë
+import "vinext/types";
+import "./.next/types/routes.d.ts";
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
