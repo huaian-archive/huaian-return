@@ -28,7 +28,7 @@
   </ol><footer><span>HUAIAN COUNTY / ARCHIVE 009</span><p>違規只新增錯位，不停止歸籍。</p></footer></section>
 </main>
 <div class="archive-toast" id="archive-toast" aria-live="polite"></div>
-<div class="jumpscare" id="jumpscare" aria-hidden="true"><div class="jumpscare-face"><span>009</span><b>你已被點名</b><small>不要回頭</small></div></div>
+<div class="jumpscare" id="jumpscare" aria-hidden="true"><div class="stalker-scene" id="stalker-scene"><div class="stalker-head"><i></i><i></i></div><div class="door-gap"></div><b id="scare-title"></b><small id="scare-detail"></small></div></div>
 <script>
 const people=[
 {no:'01',name:'喬以棠',role:'危機公關顧問',age:'37',mark:'173 cm · 烏黑低馬尾',core:'擅長整理混亂資訊並預判反應。願意失控，也不相信臨場坦白必然有用。',key:'供詞',image:'public/characters/qiao-yitang.png',quote:'先確認一件事'},
@@ -42,9 +42,17 @@ const people=[
 const list=document.querySelector('#person-list');
 function showPerson(index){const p=people[index];document.querySelectorAll('#person-list button').forEach((b,i)=>{b.setAttribute('aria-selected',String(i===index));});document.querySelector('#record-no').textContent=`第 ${p.no} 項`;document.querySelector('#portrait').src=p.image;document.querySelector('#portrait').alt=`${p.name}角色照片`;document.querySelector('#quote').textContent=p.quote;document.querySelector('#record-name').textContent=p.name;document.querySelector('#record-role').textContent=`${p.role} · ${p.age} 歲`;document.querySelector('#record-mark').textContent=p.mark;document.querySelector('#record-core').textContent=p.core;}
 people.forEach((p,i)=>{const button=document.createElement('button');button.type='button';button.role='tab';button.innerHTML=`<em>${p.no}</em><span>${p.name}<small>${p.role}</small></span><i>${p.key}</i>`;button.addEventListener('click',()=>showPerson(i));list.appendChild(button);});showPerson(0);
-const responses=['已記錄','不要重數','有人看見你了','第009項正在補正','這不是你的名字','門後沒有任何人','請保持注視','紀錄與你不符'];
-const toast=document.querySelector('#archive-toast');const scare=document.querySelector('#jumpscare');let touches=0;let toastTimer;let scareTimer;
-function triggerScare(){scare.classList.add('show');scare.setAttribute('aria-hidden','false');document.body.classList.add('scare-shake');clearTimeout(scareTimer);scareTimer=setTimeout(()=>{scare.classList.remove('show');scare.setAttribute('aria-hidden','true');document.body.classList.remove('scare-shake');},1050);}
+const responses=['已記錄','不要重數','有人看見你了','剛才窗外有人','門後沒有任何人','請保持注視','腳步聲停了','他知道你在看'];
+const scares=[
+{type:'window',title:'他剛才還在窗外',detail:'現在不在了'},
+{type:'door',title:'門沒有完全關上',detail:'有人從縫裡看你'},
+{type:'behind',title:'別轉身',detail:'他跟你一起停下來了'},
+{type:'camera',title:'距離過近',detail:'畫面外偵測到第二張臉'},
+{type:'message',title:'我看見你了',detail:'這則訊息不是網站送出的'},
+{type:'hallway',title:'走廊盡頭有人',detail:'每次抬頭都更近一點'},
+{type:'reflection',title:'倒影慢了一秒',detail:'裡面的人沒有跟著你動'}];
+const toast=document.querySelector('#archive-toast');const scare=document.querySelector('#jumpscare');const stalkerScene=document.querySelector('#stalker-scene');const scareTitle=document.querySelector('#scare-title');const scareDetail=document.querySelector('#scare-detail');let touches=0;let toastTimer;let scareTimer;let previousScare=-1;
+function triggerScare(){let index;do{index=Math.floor(Math.random()*scares.length);}while(index===previousScare&&scares.length>1);previousScare=index;const scene=scares[index];stalkerScene.className=`stalker-scene ${scene.type}`;scareTitle.textContent=scene.title;scareDetail.textContent=scene.detail;scare.classList.add('show');scare.setAttribute('aria-hidden','false');document.body.classList.add('scare-shake');clearTimeout(scareTimer);scareTimer=setTimeout(()=>{scare.classList.remove('show');scare.setAttribute('aria-hidden','true');document.body.classList.remove('scare-shake');},1250);}
 document.addEventListener('pointerdown',event=>{if(scare.classList.contains('show'))return;touches++;const ripple=document.createElement('i');ripple.className='archive-ripple';ripple.style.left=`${event.clientX}px`;ripple.style.top=`${event.clientY}px`;document.body.appendChild(ripple);setTimeout(()=>ripple.remove(),650);toast.textContent=responses[(touches-1)%responses.length];toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),850);if(touches>=7&&Math.random()<.38){touches=0;setTimeout(triggerScare,180);}});
 scare.addEventListener('pointerdown',()=>{scare.classList.remove('show');scare.setAttribute('aria-hidden','true');document.body.classList.remove('scare-shake');});
 </script>
